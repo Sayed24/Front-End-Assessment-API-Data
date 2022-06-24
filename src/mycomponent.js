@@ -41,13 +41,28 @@ const MyComponent = () => {
     let sum = data.reduce((a, b) => a + b, 0);	//get sum of all elements in array
     let average = (sum / data.length) || 0; //get average of all elements in array ;)
 
-    // const [datas, setDatas] = useState([]);
-    // const [dataa, setDataa] = useState('');
+    const [datas, setDatas] = useState([]);
+    const [dataa, setDataa] = useState('');
 
-    // console.log("Clicked tag");
-    // console.log(dataa);
-    // setDatas([...datas, dataa]);
-    // console.log(datas);
+    const addTagHandler = () => {
+        setDatas([...datas, dataa]);
+        setDataa('');
+
+        console.log("Clicked tag");
+        console.log(dataa);
+        console.log(datas);
+    }
+
+    const handleChange = e => {
+        setDataa(e.target.value);
+    };
+
+    // const handleKeypress = e => {
+    //     //it triggers by pressing the enter key
+    //     if (e.keyCode === 13) {
+    //         addTagHandler();
+    //     }
+    // };
 
     return (
         <div>
@@ -81,9 +96,9 @@ const MyComponent = () => {
                                             <li><strong>Skill: </strong> {student.skill}</li>
                                             <li><strong>Average: </strong> {average}</li>
 
-                                            {/* {datas.map(dataa => (
-                                                <p>{dataa}</p>
-                                            ))} */}
+                                            {datas.map(dataa => (
+                                                <span className='student-tag-item'>{dataa}</span>
+                                            ))}
 
                                             <div class="collapse hide" id="myCollapse">
                                                 <ol>
@@ -96,7 +111,8 @@ const MyComponent = () => {
                                                 </ol>
                                             </div>
                                             <div className='student-grades'>
-                                                <input type="text" onChange={''} placeholder="Add a tag" className='student-tag' />
+                                                <input type="text" onChange={handleChange} onClick={addTagHandler} placeholder="Add a tag" className='student-tag' />
+                                                {/* <input type="text" value={value} onChange={handleChange} onKeyPress={handleKeypress} onClick={handleSubmit} placeholder="Add a tag" className='student-tag' /> */}
                                             </div>
                                         </div>
                                     </div>
