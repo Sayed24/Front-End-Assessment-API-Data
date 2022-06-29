@@ -108,7 +108,16 @@ code {
   margin-top: 20px; */
 }
 
+.student-tags {
+  margin-top: 20px;
+}
+
 .student-tag-item {
-  padding: 10px;
-  background-color: rgba(175, 168, 168, 0.815);
+  padding: 8px;
+  border-radius: 10%;
+  background-color: rgba(196, 191, 191, 0.637);
+}
+
+.student-tags>span {
+  margin: 5px;
 }
