@@ -61,11 +61,6 @@ export const Student = (props) => {
                             <strong>Average: </strong> {getGradeAverage(props.grades)}%
                         </li>
 
-                        <div className='student-tags'>
-                            {tags.map((tag) => (
-                                <span className='student-tag-item'>  {tag} </span>
-                            ))}
-                        </div>
 
                         {/* rendering collapse data and set them to hide */}
                         <Collapse isOpen={open}>
@@ -80,6 +75,12 @@ export const Student = (props) => {
                                 <li>Test 8: &nbsp; {props.grades[7]}%</li>
                             </ol>
                         </Collapse>
+
+                        <div className='student-tags'>
+                            {tags.map((tag) => (
+                                <span className='student-tag-item'>  {tag} </span>
+                            ))}
+                        </div>
 
                         {/* adding tag input */}
                         <div className='student-grades'>
