@@ -109,15 +109,19 @@ code {
 }
 
 .student-tags {
-  margin-top: 20px;
+  width: 100px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(209, 206, 206, 0.562);
 }
 
-.student-tag-item {
+/* .student-tag-item {
   padding: 8px;
   border-radius: 10%;
   background-color: rgba(196, 191, 191, 0.637);
-}
+} */
 
-.student-tags>span {
+/* .student-tags>span {
   margin: 5px;
-}
+} */

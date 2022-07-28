@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Collapse } from 'reactstrap';
+import StudentTag from './StudentTag';
+export const Student = ({ key, pic, firstName, lastName, email, company, skill, grades, tags, addTag, id }) => {
 
-export const Student = (props) => {
-    //toggle open close grades
-    //get average
-    //add tags
-    const [tags, setTags] = useState([]);
+    const [tagInput, setTagInput] = useState('');
     const [open, setOpen] = useState(false);
 
     const handleToggle = () => setOpen(!open);
@@ -17,81 +15,80 @@ export const Student = (props) => {
         for (let i = 0; i < array.length; i++) {
             array[i] = parseInt(array[i]);
             sum += array[i];
-            average = sum / 8;  //Shoud we divide by 8 or array.length?
+            average = sum / array.length;
         }
         return average;
     };
 
-    const addTags = (e) => {
-        if ((e.key === 'Enter' && e.target.value !== null) || undefined || '') {
-            setTags([...tags, e.target.value]);
-            e.target.value = '';
-        }
-    };
+    // get all students tags
+    const studentTags = tags.map((tag, index) => (<StudentTag tag={tag} key={index} />));
 
-
+    // handle tag for submission, calls addTag from Application component
+    const onTagSubmit = (e) => {
+        e.preventDefault()
+        addTag(tagInput, id)
+        setTagInput('')
+    }
 
     return (
-        <div className='student-items' key={props.id}>
+        <div className='student-items' key={key}>
             <div className='student-div'>
                 <div>
                     <img
                         className='student-pic'
-                        src={props.pic}
-                        alt={`Pic for Student ${props.id}`}
+                        src={pic}
+                        alt={`Pic for Student ${key}`}
                     />
                 </div>
                 <div className='student-data'>
                     <li>
                         <h1>
-                            {props.firstName}&nbsp;{props.lastName}
+                            {firstName}&nbsp;{lastName}
                         </h1>
                     </li>
                     <div className='student-info'>
                         <li>
-                            <strong>Email: </strong> {props.email}
+                            <strong>Email: </strong> {email}
                         </li>
                         <li>
-                            <strong>Company: </strong> {props.company}
+                            <strong>Company: </strong> {company}
                         </li>
                         <li>
-                            <strong>Skill: </strong> {props.skill}
+                            <strong>Skill: </strong> {skill}
                         </li>
                         <li>
-                            <strong>Average: </strong> {getGradeAverage(props.grades)}%
+                            <strong>Average: </strong> {getGradeAverage(grades)}%
                         </li>
 
 
                         {/* rendering collapse data and set them to hide */}
                         <Collapse isOpen={open}>
                             <ol>
-                                <li>Test 1: &nbsp; {props.grades[0]}%</li>
-                                <li>Test 2: &nbsp; {props.grades[1]}%</li>
-                                <li>Test 3: &nbsp; {props.grades[2]}%</li>
-                                <li>Test 4: &nbsp; {props.grades[3]}%</li>
-                                <li>Test 5: &nbsp; {props.grades[4]}%</li>
-                                <li>Test 6: &nbsp; {props.grades[5]}%</li>
-                                <li>Test 7: &nbsp; {props.grades[6]}%</li>
-                                <li>Test 8: &nbsp; {props.grades[7]}%</li>
+                                <li>Test 1: &nbsp; {grades[0]}%</li>
+                                <li>Test 2: &nbsp; {grades[1]}%</li>
+                                <li>Test 3: &nbsp; {grades[2]}%</li>
+                                <li>Test 4: &nbsp; {grades[3]}%</li>
+                                <li>Test 5: &nbsp; {grades[4]}%</li>
+                                <li>Test 6: &nbsp; {grades[5]}%</li>
+                                <li>Test 7: &nbsp; {grades[6]}%</li>
+                                <li>Test 8: &nbsp; {grades[7]}%</li>
                             </ol>
                         </Collapse>
 
-                        <div className='student-tags'>
-                            {tags.map((tag) => (
-                                <span className='student-tag-item'>  {tag} </span>
-                            ))}
+                        <div>
+                            {studentTags}
                         </div>
 
                         {/* adding tag input */}
-                        <div className='student-grades'>
+                        <form onSubmit={onTagSubmit} className='student-grades'>
                             <input
-                                type='text'
-                                onKeyUp={(e) => e.key === 'Enter' && addTags(e)}
+                                type='search'
+                                value={tagInput}
+                                onChange={(e) => setTagInput(e.target.value)}
                                 placeholder='Add a tag'
                                 className='student-tag'
                             />
-                            {/* <input type="text" value={value} onChange={handleChange} onKeyPress={handleKeypress} onClick={handleSubmit} placeholder="Add a tag" className='student-tag' /> */}
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
